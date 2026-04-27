@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gobernanza de la Seguridad | OP03</title>
+
+  <!--
+    OP03 · Gobernanza de la Seguridad
+
+    Cómo editar este HTML:
+    1. Para cambiar un documento, modifica únicamente el href="..."
+    2. Las lecturas están enlazadas a OneDrive.
+    3. Las diapositivas de sesiones 1 a 4 están en slides/sesion-001.pdf, etc.
+    4. Las sesiones 5 a 14 quedan como href="#" hasta que subas las diapositivas.
+    5. Los documentos generales van en la carpeta files/
+    6. Los documentos de juegos de roles van en la carpeta roles/
+  -->
+
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #64748b;
+      --line: #e5e7eb;
+      --accent: #111827;
+      --accent-soft: #eef2f7;
+      --green: #2f6f5e;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(247, 247, 244, 0.92);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      max-width: 940px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      transition: 0.2s;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .section-title p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card,
+    details,
+    .talk-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+      transition: 0.2s;
+    }
+
+    .card {
+      padding: 22px;
+    }
+
+    .card:hover,
+    details:hover,
+    .talk-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: rgba(17, 24, 39, 0.22);
+    }
+
+    .span-6 {
+      grid-column: span 6;
+    }
+
+    .span-12 {
+      grid-column: span 12;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .card p,
+    .card li,
+    details p,
+    details li {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .file-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: white;
+    }
+
+    .file-link:hover {
+      border-color: var(--accent);
+    }
+
+    .notice {
+      background: #fffaf0;
+      border: 1px solid #f0dfb8;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      color: #6b4f12;
+      margin-top: 18px;
+    }
+
+    details {
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 124px 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .date {
+      color: var(--green);
+      font-weight: 850;
+      font-size: 0.94rem;
+    }
+
+    .session-name {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .open-symbol {
+      color: var(--muted);
+      font-weight: 850;
+      transition: 0.2s;
+    }
+
+    details[open] .open-symbol {
+      transform: rotate(45deg);
+    }
+
+    .details-body {
+      border-top: 1px solid var(--line);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .details-body h4 {
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .timeline,
+    .reading-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .reading-item {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+
+    .reading-item:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .reading-title {
+      font-weight: 780;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .talk-card {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+    }
+
+    .talk-date {
+      font-weight: 850;
+      color: var(--green);
+    }
+
+    .talks {
+      display: grid;
+      gap: 10px;
+    }
+
+    .talk strong {
+      color: var(--accent);
+    }
+
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 0.92rem;
+    }
+
+    .rubric-table th,
+    .rubric-table td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .rubric-table th {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 44px 0 64px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .span-6 {
+        grid-column: span 12;
+      }
+
+      summary {
+        grid-template-columns: 1fr auto;
+      }
+
+      .date {
+        grid-column: 1 / -1;
+      }
+
+      .details-body {
+        grid-template-columns: 1fr;
+      }
+
+      .talk-card {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a class="brand" href="#inicio">OP03 · Gobernanza de la Seguridad</a>
+      <div class="nav-links">
+        <a href="#materiales">Materiales</a>
+        <a href="#cronograma">Sesiones</a>
+        <a href="#lecturas">Lecturas</a>
+        <a href="#juegos">Juegos de roles</a>
+        <a href="#exposiciones">Exposiciones</a>
+        <a href="#evaluacion">Evaluación</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero container">
+      <div class="tag">📘 Curso OP03 · Heidelberg Center</div>
+      <h1>Gobernanza de la Seguridad</h1>
+      <p>Este sitio reúne el cronograma, las lecturas, las diapositivas, los juegos de roles, las exposiciones y las rúbricas del curso en un solo punto de consulta.</p>
+
+      <div class="hero-actions">
+        <a class="button" href="#cronograma">Ver sesiones</a>
+        <a class="button secondary" href="#lecturas">Ver lecturas</a>
+        <a class="button secondary" href="#evaluacion">Ver evaluación</a>
+      </div>
+
+      <div class="notice">
+        Pregunta central del curso: <strong>¿Cómo crear y preservar la seguridad como bien colectivo?</strong>
+      </div>
+    </section>
+
+    <section id="materiales" class="container">
+      <div class="section-title">
+        <h2>Materiales generales</h2>
+        <p>Documentos centrales del curso. No hay carpeta superior de archivos; cada documento se abre desde su card correspondiente.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card span-6">
+          <h3>📄 Guía del curso</h3>
+          <p>Programa general, objetivos, cronograma, evaluación y orientaciones académicas.</p>
+          <div class="links">
+            <a class="file-link" href="files/Guia del curso OP03-2026.pdf" target="_blank">Abrir guía</a>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h3>📝 Orientaciones de ponencia</h3>
+          <p>Documento de apoyo para preparar las exposiciones del curso.</p>
+          <div class="links">
+            <a class="file-link" href="files/orientaciones-ponencia.pdf" target="_blank">Abrir orientaciones</a>
+            <a class="file-link" href="files/rubrica-ponencia.pdf" target="_blank">Abrir rúbrica</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="cronograma" class="container">
+      <div class="section-title">
+        <h2>Cronograma sesión por sesión</h2>
+        <p>Las sesiones 1 a 4 ya apuntan a sus diapositivas. Las sesiones 5 a 14 quedan como “diapositivas pendiente” para que puedas vincularlas cuando las subas.</p>
+      </div>
+
+      <div class="timeline">
+        <details>
+          <summary>
+            <span class="date">8 de abril</span>
+            <span class="session-name">Sesión 1 · Marcos Teóricos de la Gobernanza</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Profundizar en los marcos teóricos que sustentan el estudio de la gobernanza, incluyendo enfoques de redes, gobernanza global y local, e interacción entre actores estatales y no estatales.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="slides/sesion-001.pdf" target="_blank">Diapositivas</a>
+                <a class="file-link" href="#" target="_blank">Material adicional pendiente</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">15 de abril</span>
+            <span class="session-name">Sesión 2 · Gobernanza, Seguridad y Territorio</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Analizar la importancia de la gobernanza de la seguridad a nivel local y las estrategias de gobernanza colaborativa entre actores variados.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="slides/sesion-002.pdf" target="_blank">Diapositivas</a>
+                <a class="file-link" href="#" target="_blank">Material adicional pendiente</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">22 de abril</span>
+            <span class="session-name">Sesión 3 · Vulnerabilidad y Contextos Frágiles</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Examinar la relación entre gobernanza, seguridad y territorio, destacando cómo la gobernanza de la seguridad se manifiesta en diferentes territorios y escalas.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="slides/sesion-003.pdf" target="_blank">Diapositivas</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQBHYahDbfc1RJT5BHcjGEj_AUmF6OWwY3EZ5CC2bBvBGj8?e=p6wVrt" target="_blank">Lectura 1</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAjsWjlrWSUR7Q0XpW4g8aqAWGgVSjzgLUZmvLvRelyCdg?e=MNCztn" target="_blank">Lectura 2</a>
+                <a class="file-link" href="#" target="_blank">Material adicional pendiente</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">29 de abril</span>
+            <span class="session-name">Sesión 4 · Planificación territorial y planificación estratégica</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Analizar la asignación de recursos policiales en consideración de una demanda de seguridad variable y creciente.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="slides/sesion-004.pdf" target="_blank">Diapositivas</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDxMMIRDR-CRL-6YPHRWPjiAQRnvVvdlr4REDd9AOabScU?e=lFjeF7" target="_blank">Lectura 3</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCFpAEzg1XBS6VN0TQ7r5p5Ad2AyCZz3h1XWILC3Y1RrI0?e=aAztDW" target="_blank">Lectura 4</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAaxI9lqU7ISK1raccGC6yLAQOkys0WQKZR4OrMdbu6QlY?e=ypTmkh" target="_blank">Lectura 5</a>
+                <a class="file-link" href="#" target="_blank">Material adicional pendiente</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">6 de mayo</span>
+            <span class="session-name">Sesión 5 · Gobernanza criminal global I: crimen organizado, COT y globalización desviada</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Comprender cómo las economías ilegales transnacionales y las redes criminales globales afectan la gobernanza de la seguridad a escala internacional.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAGeWxZ9x8nTryMSNM2oDXIATgaizZtxx1ON1-Y5dNntSQ?e=1ZExgr" target="_blank">Lectura 6</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCGm17ibCB1SZsP6n45xbEeAVuANoAaiZEvyI1lIOMkOkY?e=mZZxle" target="_blank">Lectura 7</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCZ-PYthRj8Q4GjyQu9OfCOAabpVshCRH5l68RQBm374yA?e=T8kX2p" target="_blank">Lectura 8</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">13 de mayo</span>
+            <span class="session-name">Sesión 6 · Gobernanza global de economías ilegales II: actores y sistema global</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Analizar la gobernanza global de las economías ilegales, con énfasis en redes criminales, Estados, élites económicas, organismos internacionales y comercio de cocaína.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDVIf_JJ64GTqTuxHw1UQ9RAQm88jNLRyBL_Hxd47RYsMs?e=RuIbaH" target="_blank">Lectura 9</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDHVdG9xAaUSLkMcRNcOEhWAZO94xtoHLmQUy-FDNisN2g?e=Udb0eV" target="_blank">Lectura 10</a>
+                <a class="file-link" href="#" target="_blank">Lectura 11 pendiente</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">16 de mayo</span>
+            <span class="session-name">Sesiones 7 y 8 · Juego de Roles I</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Aplicar los conceptos teóricos discutidos en un entorno práctico mediante un juego de rol centrado en la multidimensionalidad del concepto de seguridad.</p>
+            </div>
+            <div>
+              <h4>Materiales del juego</h4>
+              <div class="links">
+                <a class="file-link" href="roles/juego-roles-i-instrucciones-generales.pdf" target="_blank">Instrucciones generales</a>
+                <a class="file-link" href="roles/juego-roles-i-dinamica.pdf" target="_blank">Dinámica del juego</a>
+                <a class="file-link" href="roles/juego-roles-i-formatos.pdf" target="_blank">Formatos para el juego</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">27 de mayo</span>
+            <span class="session-name">Sesión 9 · Gobernanza global del comercio de drogas</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Comprender la gobernanza del comercio global de cocaína a lo largo de su cadena transnacional, desde la producción hasta los mercados de consumo.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="#" target="_blank">Lectura 11 pendiente</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCKr7J0KZsaQpRSDOJAtMNlAV8C7RIrnvtDHSUtvVzqC6g?e=oa2KNH" target="_blank">Lectura 12</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">20 de junio</span>
+            <span class="session-name">Sesiones 10 y 11 · Juego de Roles II</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Desarrollar habilidades prácticas en gestión de conflictos, negociación y toma de decisiones mediante la simulación de escenarios relacionados con seguridad y gobernanza.</p>
+            </div>
+            <div>
+              <h4>Materiales del juego</h4>
+              <div class="links">
+                <a class="file-link" href="roles/juego-roles-ii-instrucciones-generales.pdf" target="_blank">Instrucciones generales</a>
+                <a class="file-link" href="roles/juego-roles-ii-dinamica.pdf" target="_blank">Dinámica del juego</a>
+                <a class="file-link" href="roles/juego-roles-ii-formatos.pdf" target="_blank">Formatos para el juego</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">22 de junio</span>
+            <span class="session-name">Sesión 12 · Sistemas de extorsión local: gota-gota, pandillas y actores que controlan</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Analizar cómo estructuras criminales locales imponen sistemas de gobierno informal sobre comunidades mediante miedo, deuda o “servicio”.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCQPNDh6BQ1TbuOUdXTGr7EAQvHQuu1Lq0ESecfYLLsQpI?e=5lzec7" target="_blank">Lectura 13</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">24 de junio</span>
+            <span class="session-name">Sesión 13 · Crimen organizado y delitos ambientales</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Comprender cómo los grupos criminales organizan economías extractivas ilegales y ejercen formas territoriales de gobernanza sobre áreas rurales y ecológicas estratégicas.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQA_QlPQwT0hTZQgcg1CwQyMARgsKrIpaNRZ9GCoU4zThZo?e=nykoE0" target="_blank">Lectura 14</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">1 de julio</span>
+            <span class="session-name">Sesión 14 · Gobernar la (in)seguridad: balance, dilemas y horizontes</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+          <div class="details-body">
+            <div>
+              <h4>Objetivo</h4>
+              <p>Reflexionar colectivamente sobre los aprendizajes del curso, reconectar los marcos teóricos con los casos estudiados y debatir modelos futuros de gobernanza híbrida, resiliente y equitativa.</p>
+            </div>
+            <div>
+              <h4>Materiales</h4>
+              <div class="links">
+                <a class="file-link" href="#" target="_blank">Diapositivas pendiente</a>
+                <a class="file-link" href="files/orientaciones-ensayo-final.pdf" target="_blank">Orientaciones ensayo final</a>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="lecturas" class="container">
+      <div class="section-title">
+        <h2>Lecturas obligatorias</h2>
+        <p>Las lecturas están enlazadas a OneDrive para evitar problemas con el peso de los archivos en GitHub.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card span-6">
+          <h3>Parte 1 · Lo teórico</h3>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 1. ARIAS, A., LUNEKE, A. (2022).</p>
+            <p>Inseguridad y producción del espacio: la paradoja de la prevención situacional del delito. Revista de Urbanismo, (46), 95-111.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQBHYahDbfc1RJT5BHcjGEj_AUmF6OWwY3EZ5CC2bBvBGj8?e=p6wVrt" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 2. LINK, F., SEÑORET, A., FUENTES, L., et al. (2022).</p>
+            <p>Vitalidad urbana y sociabilidad barrial: complejidades de una metrópolis latinoamericana. Ciudad y Territorio Estudios Territoriales, 443-458.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAjsWjlrWSUR7Q0XpW4g8aqAWGgVSjzgLUZmvLvRelyCdg?e=MNCztn" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 3. CHALFIN, A., McCRARY, J. (2017).</p>
+            <p>Criminal deterrence: A review of the literature. Journal of Economic Literature, 55(1), 5-48.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDxMMIRDR-CRL-6YPHRWPjiAQRnvVvdlr4REDd9AOabScU?e=lFjeF7" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 4. GREENE, M., MORA, R. (2008).</p>
+            <p>Dimensiones espaciales de la seguridad residencial: Flujos de movimiento y campos visuales. Revista INVI, 23(64), 143-166.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCFpAEzg1XBS6VN0TQ7r5p5Ad2AyCZz3h1XWILC3Y1RrI0?e=aAztDW" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 5. LAUFS, J., BOWERS, K., BIRKS, D., & JOHNSON, S. (2021).</p>
+            <p>Understanding the concept of ‘demand’ in policing: a scoping review and resulting implications for demand management. Policing and Society, 31(8), 895-918.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAaxI9lqU7ISK1raccGC6yLAQOkys0WQKZR4OrMdbu6QlY?e=ypTmkh" target="_blank">Abrir lectura</a></div>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h3>Parte 2 · Gobernanza de la seguridad global</h3>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 6. LESSING, B., & WILLIS, G. D. (2019).</p>
+            <p>Legitimacy in criminal governance: Managing a drug empire from behind bars. American Political Science Review, 113(2), 584–606.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQAGeWxZ9x8nTryMSNM2oDXIATgaizZtxx1ON1-Y5dNntSQ?e=1ZExgr" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 7. BUEGER, C., & EDMUNDS, T. (2020).</p>
+            <p>Blue crime: Conceptualising transnational organised crime at sea. Marine Policy, 119, 104067.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCGm17ibCB1SZsP6n45xbEeAVuANoAaiZEvyI1lIOMkOkY?e=mZZxle" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 8. BARTOLOMÉ, M. (2020).</p>
+            <p>La utilidad de una concepción de seguridad nacional moderna y dinámica, en la lucha contra el crimen organizado en América Latina. Relaciones Internacionales, 45-61.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCZ-PYthRj8Q4GjyQu9OfCOAabpVshCRH5l68RQBm374yA?e=T8kX2p" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 9. SULLIVAN, J. (2023).</p>
+            <p>The Information Age: Transnational Organized Crime, Networks, and Illicit Markets. Journal of Strategic Security.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDVIf_JJ64GTqTuxHw1UQ9RAQm88jNLRyBL_Hxd47RYsMs?e=RuIbaH" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 10. ACHILLI, L., & SANCHEZ, G. (2021).</p>
+            <p>Introduction – migration, smuggling and the illicit global economy.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQDHVdG9xAaUSLkMcRNcOEhWAZO94xtoHLmQUy-FDNisN2g?e=Udb0eV" target="_blank">Abrir lectura</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 11. JIMENEZ-GARCIA, W.</p>
+            <p>Sociología del narcotráfico. En edición.</p>
+            <div class="links"><a class="file-link" href="#" target="_blank">Pendiente de subir</a></div>
+          </div>
+
+          <div class="reading-item">
+            <p class="reading-title">Lectura 12. MAGLIOCCA, N., AKSU, R., McSWEENEY, K., TANVEER, H., CURTIN, K., & KESKIN, B. (2024).</p>
+            <p>Towards spatially disaggregated cocaine supply chain modeling. Socio-Economic Planning Sciences.</p>
+            <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCKr7J0KZsaQpRSDOJAtMNlAV8C7RIrnvtDHSUtvVzqC6g?e=oa2KNH" target="_blank">Abrir lectura</a></div>
+          </div>
+        </article>
+
+        <article class="card span-12">
+          <h3>Parte 3 · Gobernanza criminal</h3>
+
+          <div class="grid">
+            <div class="span-6">
+              <div class="reading-item">
+                <p class="reading-title">Lectura 13. ALZATE-ZULUAGA, M. L., & JIMÉNEZ-GARCÍA, W. G. (2021).</p>
+                <p>Rackets and the Markets of Violence: A Case Study of Altavista, Medellín, Colombia. Latin American Perspectives, 48(1), 28-41.</p>
+                <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQCQPNDh6BQ1TbuOUdXTGr7EAQvHQuu1Lq0ESecfYLLsQpI?e=5lzec7" target="_blank">Abrir lectura</a></div>
+              </div>
+            </div>
+
+            <div class="span-6">
+              <div class="reading-item">
+                <p class="reading-title">Lectura 14. GARCÍA-JIMÉNEZ, C., & VARGAS-RODRIGUEZ, Y. (2021).</p>
+                <p>Passive government, organized crime, and massive deforestation: The case of western Mexico. Conservation Science and Practice, 3.</p>
+                <div class="links"><a class="file-link" href="https://1drv.ms/b/c/f0437e1066d439c2/IQA_QlPQwT0hTZQgcg1CwQyMARgsKrIpaNRZ9GCoU4zThZo?e=nykoE0" target="_blank">Abrir lectura</a></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="juegos" class="container">
+      <div class="section-title">
+        <h2>Juegos de roles</h2>
+        <p>Cards preparadas para enlazar instrucciones generales, dinámica del juego y formatos.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card span-6">
+          <h3>🎲 Juego de Roles I</h3>
+          <p>Simulación centrada en la multidimensionalidad y territorialidad de la seguridad.</p>
+          <div class="links">
+            <a class="file-link" href="roles/juego-roles-i-instrucciones-generales.pdf" target="_blank">Instrucciones generales</a>
+            <a class="file-link" href="roles/juego-roles-i-dinamica.pdf" target="_blank">Dinámica del juego</a>
+            <a class="file-link" href="roles/juego-roles-i-formatos.pdf" target="_blank">Formatos para el juego</a>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h3>🎲 Juego de Roles II</h3>
+          <p>Simulación evaluativa centrada en gestión de conflictos, negociación y gobernanza criminal.</p>
+          <div class="links">
+            <a class="file-link" href="roles/juego-roles-ii-instrucciones-generales.pdf" target="_blank">Instrucciones generales</a>
+            <a class="file-link" href="roles/juego-roles-ii-dinamica.pdf" target="_blank">Dinámica del juego</a>
+            <a class="file-link" href="roles/juego-roles-ii-formatos.pdf" target="_blank">Formatos para el juego</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="exposiciones" class="container">
+      <div class="section-title">
+        <h2>Exposiciones</h2>
+        <p>Calendario de ponencias. Las preguntas orientadoras son un punto de partida: cada grupo puede trabajar una, varias o construir su propio énfasis dentro del tema.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="talk-card">
+          <div class="talk-date">📅 6 de mayo</div>
+          <div class="talks">
+            <p class="talk"><strong>José Luis y Laura</strong> — Concepto de seguridad en los ODS</p>
+          </div>
+        </article>
+
+        <article class="talk-card">
+          <div class="talk-date">📅 13 de mayo</div>
+          <div class="talks">
+            <p class="talk"><strong>Simón y Nicolás</strong> — Estigmatización / Exclusión territorial</p>
+            <p class="talk"><strong>Bou y José Miguel</strong> — Paradoja de la prevención del delito</p>
+          </div>
+        </article>
+
+        <article class="talk-card">
+          <div class="talk-date">📅 27 de mayo</div>
+          <div class="talks">
+            <p class="talk"><strong>Daniel M. y Emilia</strong> — Criminalidad organizada y desarrollo económico</p>
+            <p class="talk"><strong>Mauricio y Carlos</strong> — Criminalidad organizada</p>
+          </div>
+        </article>
+
+        <article class="talk-card">
+          <div class="talk-date">📅 24 de junio</div>
+          <div class="talks">
+            <p class="talk"><strong>Marco y Felipe</strong> — Mafias y otros sistemas de extorsión</p>
+            <p class="talk"><strong>Silvana y Dani C.</strong> — Corrupción, legitimidad y gobernanza</p>
+          </div>
+        </article>
+
+        <article class="talk-card">
+          <div class="talk-date">📅 1 de julio</div>
+          <div class="talks">
+            <p class="talk"><strong>Esteban y Giana</strong> — Ecocidio</p>
+            <p class="talk"><strong>Esteban y Mauricio</strong> — Criminalidad ambiental</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="links" style="margin-top: 20px;">
+        <a class="file-link" href="files/orientaciones-ponencia.pdf" target="_blank">Orientaciones de ponencia</a>
+        <a class="file-link" href="files/rubrica-ponencia.pdf" target="_blank">Rúbrica de ponencia</a>
+      </div>
+    </section>
+
+    <section id="evaluacion" class="container">
+      <div class="section-title">
+        <h2>Evaluación y rúbricas</h2>
+        <p>Haz clic en cada componente para desplegar su rúbrica.</p>
+      </div>
+
+      <div class="timeline">
+        <details>
+          <summary>
+            <span class="date">30%</span>
+            <span class="session-name">🎲 Participación activa en dos juegos de roles · Evaluación individual</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+
+          <div class="details-body">
+            <div>
+              <h4>Distribución</h4>
+              <p>Dos juegos de roles. Cada uno vale 15% de la nota final.</p>
+              <div class="links">
+                <a class="file-link" href="files/rubrica-juegos-roles.pdf" target="_blank">Abrir rúbrica en PDF</a>
+              </div>
+            </div>
+
+            <div>
+              <h4>Rúbrica</h4>
+              <table class="rubric-table">
+                <tr><th>Criterio</th><th>Peso</th><th>Desempeño esperado</th></tr>
+                <tr><td>Participación</td><td>25%</td><td>Asume el papel asignado y contribuye significativamente.</td></tr>
+                <tr><td>Preparación previa</td><td>25%</td><td>Demuestra estudio del material previo.</td></tr>
+                <tr><td>Relación con conceptos teóricos</td><td>25%</td><td>Relaciona el caso con conceptos de clase y lecturas.</td></tr>
+                <tr><td>Aportes originales</td><td>25%</td><td>Propone aportes creativos y pertinentes.</td></tr>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">30%</span>
+            <span class="session-name">🎤 Ponencia en parejas · Evaluación grupal</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+
+          <div class="details-body">
+            <div>
+              <h4>Orientación</h4>
+              <p>La exposición debe conectar el tema con teorías y casos del curso. Duración: 20 minutos.</p>
+              <div class="links">
+                <a class="file-link" href="files/rubrica-ponencia.pdf" target="_blank">Abrir rúbrica en PDF</a>
+              </div>
+            </div>
+
+            <div>
+              <h4>Rúbrica</h4>
+              <table class="rubric-table">
+                <tr><th>Criterio</th><th>Peso</th><th>Desempeño esperado</th></tr>
+                <tr><td>Claridad del tema</td><td>20%</td><td>Presenta el tema de manera clara y estructurada.</td></tr>
+                <tr><td>Manejo del tema</td><td>30%</td><td>Demuestra dominio y fundamento.</td></tr>
+                <tr><td>Respeto del tiempo</td><td>10%</td><td>Respeta los 20 minutos.</td></tr>
+                <tr><td>Consulta previa</td><td>20%</td><td>Consulta e incorpora sugerencias.</td></tr>
+                <tr><td>Ayudas audiovisuales</td><td>20%</td><td>Usa apoyos claros y pertinentes.</td></tr>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="date">40%</span>
+            <span class="session-name">📝 Ensayo académico final · Evaluación individual</span>
+            <span class="open-symbol">＋</span>
+          </summary>
+
+          <div class="details-body">
+            <div>
+              <h4>Orientación</h4>
+              <p>El ensayo analiza uno de los casos de los juegos de rol y desarrolla una propuesta de mejoramiento.</p>
+              <div class="links">
+                <a class="file-link" href="files/rubrica-ensayo-final.pdf" target="_blank">Abrir rúbrica en PDF</a>
+                <a class="file-link" href="files/orientaciones-ensayo-final.pdf" target="_blank">Orientaciones ensayo</a>
+              </div>
+            </div>
+
+            <div>
+              <h4>Rúbrica</h4>
+              <table class="rubric-table">
+                <tr><th>Criterio</th><th>Peso</th><th>Desempeño esperado</th></tr>
+                <tr><td>Simulación personal</td><td>30%</td><td>Presenta mejor y peor posibilidad, detalladas y fundamentadas.</td></tr>
+                <tr><td>Análisis original</td><td>20%</td><td>Desarrolla análisis profundo y propio.</td></tr>
+                <tr><td>Relación con teoría</td><td>20%</td><td>Conecta caso y teoría del curso.</td></tr>
+                <tr><td>Conclusiones y normas</td><td>30%</td><td>Conclusiones claras, APA, redacción y presentación.</td></tr>
+              </table>
+              <p class="small-note">Ante plagio, el ensayo se califica con nota mínima.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>Gobernanza de la Seguridad · OP03</strong></p>
+      <p>Heidelberg Center para América Latina · Sitio académico de apoyo al curso.</p>
+    </div>
+  </footer>
+</body>
+</html>
